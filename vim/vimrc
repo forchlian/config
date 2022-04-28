@@ -1,0 +1,17 @@
+" set line number
+set number
+
+" php, tab as 4 space key
+autocmd FileType php set shiftwidth=4 tabstop=4 softtabstop=4 expandtab
+
+" C C++, tab as 8 space key
+autocmd FileType c,cpp set shiftwidth=8 tabstop=8 softtabstop=8 noexpandtab
+
+set cursorline
+
+" Plugins will be downloaded under the specified directory.                                                                                                  
+call plug#begin('~/.vim/plugged')                                                                                                                    
+Plug 'preservim/nerdtree'
+call plug#end()
+
+nmap tt :NERDTreeToggle<CR>
