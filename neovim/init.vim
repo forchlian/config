@@ -1,6 +1,22 @@
+" nvim from vim
+set runtimepath^=~/.vim runtimepath+=~/.vim/after
+let &packpath = &runtimepath
+source ~/.vimrc
+
 set cursorline
 
 set number
+
+" cscope
+if has("cscope")
+	set csto=0
+	set cst
+	if filereadable("cscope.out")
+		silent cs add cscope.out
+	elseif $CSCOPE_DB != ""
+		silent cs add $CSCOPE_DB
+	endif
+endif
 
 if has("autocmd")
 	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
