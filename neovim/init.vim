@@ -3,10 +3,6 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 source ~/.vimrc
 
-set cursorline
-
-set number
-
 " cscope
 if has("cscope")
 	set csto=0
@@ -25,14 +21,42 @@ endif
 " Plugins will be downloaded under the specified directory.
 call plug#begin('~/.config/nvim/plugged')
 
-" treesitter
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" indent-blankline
+Plug 'lukas-reineke/indent-blankline.nvim'
+
+" coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" NERDTreeToggle
-Plug 'scrooloose/nerdtree'
+" nvim-tree
+Plug 'kyazdani42/nvim-web-devicons' " for file icons 
+Plug 'kyazdani42/nvim-tree.lua'
+
+" tagbar
+Plug 'preservim/tagbar'
+
+" telescope
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
+" bufferline
+Plug 'akinsho/bufferline.nvim'
+
+" treesitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 call plug#end()
+
+" ===
+" === indent-blankline
+" ===
+lua << EOF
+require("indent_blankline").setup{
+  show_current_context = true,
+  show_current_context_start = true,
+  show_end_of_line = true,
+  space_char_blankline = " ",
+}
+EOF
 
 " ===
 " === coc.nvim
@@ -85,9 +109,50 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " ===
-" ===  NERDTreeToggle
+" === nvim-tree
 " ===
-nmap tt :NERDTreeToggle<CR>
+nmap tt :NvimTreeToggle<CR>
+
+lua << EOF
+require'nvim-web-devicons'.setup {
+  default = true;
+}
+
+require'nvim-tree'.setup()
+EOF
+
+" ===
+" === tagbar
+" ===
+nnoremap mm : TagbarToggle<CR> 
+
+" ===
+" === telescope
+" ===
+lua << EOF
+require'telescope'.setup{
+  pickers = {
+    find_files = {
+      theme = "dropdown",
+    }
+  }
+}
+EOF
+
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+" nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+" nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+" nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+
+" ===
+" === bufferline
+" ===
+lua << EOF
+require("bufferline").setup{}
+EOF
+
+nnoremap <silent>[b :BufferLineCycleNext<CR>
+nnoremap <silent>[p :BufferLineCyclePrev<CR>
 
 " ===
 " === nvim-treesitter
