@@ -11,7 +11,4 @@ set cursorline
 
 " Plugins will be downloaded under the specified directory.                                                                                                  
 call plug#begin('~/.vim/plugged')                                                                                                                    
-Plug 'preservim/nerdtree'
 call plug#end()
-
-nmap tt :NERDTreeToggle<CR>
