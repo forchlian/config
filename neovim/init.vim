@@ -42,6 +42,7 @@ Plug 'nvim-telescope/telescope.nvim'
 " Plug 'akinsho/bufferline.nvim'
 
 " nvim-cmp
+Plug 'williamboman/nvim-lsp-installer'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
@@ -125,6 +126,18 @@ nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 set completeopt=menu,menuone,noselect
 
 lua <<EOF
+
+  require("nvim-lsp-installer").setup({
+    automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
+    ui = {
+      icons = {
+        server_installed = "✓",
+	server_pending = "➜",
+        server_uninstalled = "✗"
+      }
+    }
+  })
+
   -- Setup nvim-cmp.
   local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -202,13 +215,13 @@ lua <<EOF
   })
   
   -- help lspconfig-all or https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md 
-  local lspconfs = {'asm-lsp', 'clangd', 'cmake', 'bashls', 'dockerls', 'eslint', 'gopls', 'html', 'jsonls',
+  local lspconfs = {'asm_lsp', 'clangd', 'cmake', 'bashls', 'dockerls', 'eslint', 'gopls', 'html', 'jsonls',
   	'java_language_server', 'marksman', 'phpactor', 'sqlls', 'yamlls'}
   -- Setup lspconfig.
   local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
   for idx, lspconf in ipairs(lspconfs) do 
-    require('lspconfig')['clangd'].setup {
+    require('lspconfig')[lspconf].setup {
       capabilities = capabilities
     }
   end
