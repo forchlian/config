@@ -5,9 +5,13 @@ set number
 autocmd FileType php set shiftwidth=4 tabstop=4 softtabstop=4 expandtab
 
 " C C++, tab as 8 space key
-autocmd FileType c,cpp set shiftwidth=8 tabstop=8 softtabstop=8 noexpandtab
+autocmd FileType c,cpp,go set shiftwidth=8 tabstop=8 softtabstop=8 noexpandtab
 
 set cursorline
+
+" elflord koehler pablo ron
+set background=dark
+colorscheme koehler
 
 " Plugins will be downloaded under the specified directory.                                                                                                  
 call plug#begin('~/.vim/plugged')                                                                                                                    

@@ -22,7 +22,7 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 
 " colorscheme
-Plug 'morhetz/gruvbox'
+" Plug 'morhetz/gruvbox'
 
 " indent-blankline
 Plug 'lukas-reineke/indent-blankline.nvim'
@@ -61,8 +61,8 @@ call plug#end()
 " ===
 " === colorscheme
 " ===
-set background=dark
-colorscheme gruvbox
+" set background=dark
+" colorscheme elflord
 
 " ===
 " === indent-blankline
@@ -216,7 +216,7 @@ lua <<EOF
   
   -- help lspconfig-all or https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md 
   local lspconfs = {'asm_lsp', 'clangd', 'cmake', 'bashls', 'dockerls', 'eslint', 'gopls', 'html', 'jsonls',
-  	'java_language_server', 'marksman', 'phpactor', 'sqlls', 'yamlls'}
+  	'java_language_server', 'marksman', 'intelephense', 'sqlls', 'vimls', 'yamlls'}
   -- Setup lspconfig.
   local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
